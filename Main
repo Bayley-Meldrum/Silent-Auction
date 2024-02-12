@@ -21,7 +21,7 @@ def silent_auction(reserve_price):
     # Asks the user to input their name to keep track of who bid what amount
     while True:
         name = input("Enter your name (or 'F' to finish): ").strip()
-        # Checks if name = F. If so, ends the auction.
+        # Checks if name = F. If so, ends the auction. If not, continues the program
         if name.upper() == 'F':
             break
         # Asks the user to input their bid
@@ -32,7 +32,7 @@ def silent_auction(reserve_price):
             bids.append(bid)
             print("Bid accepted!")
         else:
-            print("Need a higher bid!")
+            print("Please enter a bid larger than {highest_bid}!")
 
     if bids:
         highest_bid = max(bids)

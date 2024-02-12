@@ -25,11 +25,16 @@ def silent_auction(reserve_price):
         if name.upper() == 'F':
             break
         # Asks the user to input their bid
-        bid = int(input("Please enter your bid"))
-        if bid > 0:
-            return bid
-        else:
-            print("invalid number. Please enter a number larger than zero")
+    while True:
+        try:
+            bid = int(input("Please enter your bid: "))
+            if bid > 0:
+                return bid
+            else:
+                print("Invalid number. Please enter a number larger than zero.")
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
+
         # Checks if the bid amount is higher than the previous bid(s)
         if not bids or bid > max(bids):
             names.append(name)

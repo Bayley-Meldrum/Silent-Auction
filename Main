@@ -1,51 +1,59 @@
-#function to obtain reserve price from the auctioneer (user)
+# Function to obtain reserve price from the auctioneer (user)
 def get_reserve_price():
-    while true:
-        reserve_price = int(input("Please enter the Reserve price"))
-#checks if the reserve price is larger than zero
-except ValueError:        
-    print:(invalid number, Please enter a number larger than zero.)
+    while True:  
+        try:  
+            reserve_price = int(input("Please enter the Reserve price: "))
+            if reserve_price > 0:  # Checks if the reserve price is larger than zero
+                return reserve_price
+            else:
+                print("Invalid number. Please enter a number larger than zero.")
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")  
+
 # Function for the silent Auction
 def silent_auction(reserve_price):
     bids = []
     names = []
-    
-    
-    #prints a message stating what the program is and the reserve price
+
+    # Prints a message stating what the program is and the reserve price
     print("Welcome to the Silent Auction!")
     print(f"Reserve Price: ${reserve_price}")
-    #asks the user to input their name to keep track of who bid what amount
+    # Asks the user to input their name to keep track of who bid what amount
     while True:
         name = input("Enter your name (or 'F' to finish): ").strip()
-        #checks if name = F. if so, ends the auction.
+        # Checks if name = F. If so, ends the auction.
         if name.upper() == 'F':
             break
-        #asks the user input their name
+        # Asks the user to input their bid
         bid = float(input("Enter your bid: $"))
-        #checks if the bid amount is higher than the previous bid(s) 
+        # Checks if the bid amount is higher than the previous bid(s)
         if not bids or bid > max(bids):
             names.append(name)
             bids.append(bid)
             print("Bid accepted!")
         else:
             print("Need a higher bid!")
-            
+
     if bids:
         highest_bid = max(bids)
         highest_bid_index = bids.index(highest_bid)
         winning_name = names[highest_bid_index]
-        
+
         print("\nAuction Results:")
         print(f"Highest Bid: ${highest_bid} by {winning_name}")
-        #checks if the bids are higher than the reserve price. If they arent, then print a message stating the the bids were less than reserve price
+        # Checks if the bids are higher than the reserve price. If they aren't, then print a message stating the bids were less than the reserve price
         if highest_bid >= reserve_price:
             print("Reserve price met! Sale completed.")
         else:
             print("Reserve price not met. Auction unsuccessful.")
-        #prints bidding history
+        # Prints bidding history
         print("\nBid History:")
         for i in range(len(bids)):
             print(f"Name: {names[i]}, Bid: ${bids[i]}")
     else:
         print("No bids were made.")
 
+# Call the function to get the reserve price
+reserve_price = get_reserve_price()
+# Call the silent auction function with the reserve price
+silent_auction(reserve_price)

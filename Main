@@ -10,7 +10,7 @@ def get_reserve_price():
         except ValueError:
             print("Invalid input. Please enter a valid number.")  
 
-# Function for the silent Auction
+# Function to take bids from the user(s)
 def silent_auction(reserve_price):
     bids = []
     names = []
@@ -25,7 +25,11 @@ def silent_auction(reserve_price):
         if name.upper() == 'F':
             break
         # Asks the user to input their bid
-        bid = float(input("Enter your bid: $"))
+        bid = int(input("Please enter your bid"))
+        if bid > 0:
+            return bid
+        else:
+            print("invalid number. Please enter a number larger than zero")
         # Checks if the bid amount is higher than the previous bid(s)
         if not bids or bid > max(bids):
             names.append(name)
